@@ -1,7 +1,6 @@
-# Add 'repo' label to any root file changes
-repo:
-  - ./*
-
+documentation:
+  - ./README.md
+  
 test:
   - Htl.Utils.Test/**/*
 
