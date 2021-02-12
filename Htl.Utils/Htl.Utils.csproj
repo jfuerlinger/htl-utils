@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Josef Fürlinger</Authors>
     <Company>HTL Leonding</Company>
     <Description>Some handy utils for file handling and authentication.
@@ -11,7 +11,7 @@ Special credits to Gerald Köck!</Description>
     <RepositoryUrl>https://github.com/jfuerlinger/htl-utils</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
