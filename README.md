@@ -1,7 +1,7 @@
 # HTL Utilities (C#)
 
 Some handy utility classes.
-With special credits to Gerald Köck!
+With special credits to Gerald Köck for sharing the source code!
 
 ## Repo Healthiness
 
