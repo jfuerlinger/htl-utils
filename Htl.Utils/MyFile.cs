@@ -17,7 +17,6 @@ namespace Utils
         {
             if (string.IsNullOrEmpty(fileName)) return null;
             string path = Environment.CurrentDirectory;
-            // string path = AppDomain.CurrentDomain.BaseDirectory;
             while (path != Directory.GetDirectoryRoot(path) &&
                 Directory.GetFiles(path, fileName).Length == 0)
             {
@@ -35,7 +34,6 @@ namespace Utils
         public static string GetFullFolderNameInApplicationTree(this string folderName)
         {
             if (string.IsNullOrEmpty(folderName)) return null;
-            //string path = Environment.CurrentDirectory;
             string path = AppDomain.CurrentDomain.BaseDirectory;
             while (path != Directory.GetDirectoryRoot(path) &&
                 Directory.GetDirectories(path, folderName).Length == 0)
