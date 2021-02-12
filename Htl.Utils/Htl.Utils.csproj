@@ -11,7 +11,7 @@ Special credits to Gerald Köck!</Description>
     <RepositoryUrl>https://github.com/jfuerlinger/htl-utils</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
