@@ -7,3 +7,7 @@ With special credits to Gerald Köck!
 
 ![Build](https://github.com/jfuerlinger/htl-utils/workflows/Build/badge.svg)
 ![Publish](https://github.com/jfuerlinger/htl-utils/workflows/Publish/badge.svg)
+
+## Open work
+
+[![GitHub issues open](https://img.shields.io/github/issues/network-tools/shconfparser.svg)](https://github.com/network-tools/shconfparser/issues)
