@@ -3,7 +3,7 @@ repo:
   - ./*
 
 test:
-  - /*Test/**/*
+  - Htl.Utils.Test/**/*
 
 nuget:
-- /Htl.Utils/**/*
+  - Htl.Utils/**/*
