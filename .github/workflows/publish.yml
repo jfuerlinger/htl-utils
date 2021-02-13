@@ -57,7 +57,7 @@ jobs:
     - name: Replace version info
       uses: jacobtomlinson/gha-find-replace@master
       with:
-        find: "{MAJOR.MINOR.PATCH}"
+        find: "0.0.0"
         replace: "${{steps.semver.outputs.major}}.${{steps.semver.outputs.minor}}.${{steps.semver.outputs.patch}}"
 
     - name: Install dependencies
