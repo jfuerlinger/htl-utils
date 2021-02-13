@@ -6,24 +6,65 @@ on:
     branches: [ main ]
     types:
       - completed
+        
+  workflow_dispatch:
+
 
 jobs:
   publish-nuget:
     runs-on: ubuntu-latest
     steps:
+    
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    
     - name: Install dependencies
       run: dotnet restore
+    
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
+    - uses: paulhatch/semantic-version@v3.3
+      id: semver
+      with:
+        # The prefix to use to identify tags
+        branch: "main"
+        # The prefix to use to identify tags
+        tag_prefix: "v"
+        # A string which, if present in a git commit, indicates that a change represents a
+        # major (breaking) change, supports regular expressions wrapped with '/'
+        major_pattern: "(MAJOR)"
+        # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+        minor_pattern: "(MINOR)"
+        # A string to determine the format of the version output
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
+        # Optional path to check for changes. If any changes are detected in the path the
+        # 'changed' output will true. Enter multiple paths separated by spaces.
+        #change_path: "src/my-service"
+        # Named version, will be used as suffix for name version tag
+        namespace: htl-utils
+        # Indicate whether short tags like 'v1' should be supported. If false only full
+        # tags like 'v1.0.0' will be recognized.
+        short_tags: true
+        # If this is set to true, *every* commit will be treated as a new version.
+        bump_each_commit: true
+
+    - name: Print version info
+      run: |
+        echo ${{steps.semver.outputs.version}}
+        echo ${{steps.semver.outputs.version_tag}}
+
     - name: Publish to NuGet
       uses: brandedoutcast/publish-nuget@v2
       with:
         PROJECT_FILE_PATH: Htl.Utils/Htl.Utils.csproj
-        VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
+        #VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
+        VERSION_STATIC: ${{steps.semver.outputs.version_tag}}
         TAG_FORMAT: '*'
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
