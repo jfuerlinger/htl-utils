@@ -58,7 +58,7 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@master
       with:
         find: "{MAJOR.MINOR.PATCH}"
-        replace: "${{steps.semver.outputs.version_tag}}"
+        replace: "${{steps.semver.outputs.major}}.${{steps.semver.outputs.minor}}.${{steps.semver.outputs.patch}}"
 
     - name: Install dependencies
       run: dotnet restore
