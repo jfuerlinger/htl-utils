@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     types:
       - completed
+        
+  workflow_dispatch:
+
 
 jobs:
   publish-nuget:
@@ -62,6 +65,6 @@ jobs:
       with:
         PROJECT_FILE_PATH: Htl.Utils/Htl.Utils.csproj
         #VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
-        VERSION: ${{steps.semver.outputs.version_tag}}
+        VERSION_STATIC: ${{steps.semver.outputs.version_tag}}
         TAG_FORMAT: '*'
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
