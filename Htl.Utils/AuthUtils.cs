@@ -57,29 +57,13 @@ namespace Utils
       return hashText + ByteArrayToHexString(salt);
     }
 
-    public static string ByteArrayToHexString(byte[] byteArray)
-    {
-      StringBuilder hex = new StringBuilder(byteArray.Length * 2);
-      foreach (byte b in byteArray)
-        hex.AppendFormat("{0:x2}", b);
-      return hex.ToString();
-    }
-
-    public static byte[] HexStringToByteArray(string hexString)
-    {
-      byte[] byteArray = new byte[16];
-      for (int i = 0; i < hexString.Length / 2; i++)
-      {
-        string hexByte = hexString.Substring(i * 2, 2);
-        byteArray[i] = Convert.ToByte(hexByte, 16);
-      }
-      return byteArray;
-    }
-
     /// <summary>
-    /// JWT erzeugen. Minimale Claim-Infos: Email und Rolle
+    /// Json Web Token erzeugen.
     /// </summary>
-    /// <param name="userInfo"></param>
+    /// <param name="claims">Alle zu enthaltenden Claims</param>
+    /// <param name="issuer">Partei welche den Token anfordert</param>
+    /// <param name="audience">Partei welche mit dem Token weiterarbeitet</param>
+    /// <param name="secret">Schlüssel für die Signierung</param>
     /// <returns>Token mit Claims</returns>
     public static string GenerateJwtToken(List<Claim> claims, string issuer, string audience, string secret)
     {
@@ -94,6 +78,25 @@ namespace Utils
         signingCredentials: credentials);
 
       return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    private static string ByteArrayToHexString(byte[] byteArray)
+    {
+      StringBuilder hex = new StringBuilder(byteArray.Length * 2);
+      foreach (byte b in byteArray)
+        hex.AppendFormat("{0:x2}", b);
+      return hex.ToString();
+    }
+
+    private static byte[] HexStringToByteArray(string hexString)
+    {
+      byte[] byteArray = new byte[16];
+      for (int i = 0; i < hexString.Length / 2; i++)
+      {
+        string hexByte = hexString.Substring(i * 2, 2);
+        byteArray[i] = Convert.ToByte(hexByte, 16);
+      }
+      return byteArray;
     }
   }
 }
