@@ -23,12 +23,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    
-    - name: Install dependencies
-      run: dotnet restore
-    
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
 
     - uses: paulhatch/semantic-version@v3.3
       id: semver
@@ -60,11 +54,23 @@ jobs:
         echo ${{steps.semver.outputs.version}}
         echo ${{steps.semver.outputs.version_tag}}
 
+    - name: Replace version info
+      uses: jacobtomlinson/gha-find-replace@master
+      with:
+        find: "0.0.0"
+        replace: "${{steps.semver.outputs.major}}.${{steps.semver.outputs.minor}}.${{steps.semver.outputs.patch}}"
+
+    - name: Install dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
     - name: Publish to NuGet
       uses: brandedoutcast/publish-nuget@v2
       with:
         PROJECT_FILE_PATH: Htl.Utils/Htl.Utils.csproj
-        #VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
-        VERSION_STATIC: ${{steps.semver.outputs.version_tag}}
+        VERSION_REGEX: '^\s*<Version>(.*)<\/Version>\s*$'
+        #VERSION_STATIC: ${{steps.semver.outputs.version_tag}}
         TAG_FORMAT: '*'
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
